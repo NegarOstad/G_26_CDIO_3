@@ -17,6 +17,7 @@ public class GameController {
     String userInput;
     int balance = 0;
     Player[] player;
+    GUI_Player[] guiPlayer;
     Square[] square;
     public void init() {
         BoardInit board = new BoardInit();
@@ -44,6 +45,7 @@ public class GameController {
 
 
         player = new Player[playerCount];
+        guiPlayer = new GUI_Player[playerCount];
 
         for (int i = 0 ; i < playerCount ; i++) {
             //System.out.println("There are " + playerCount + "players.");
@@ -55,7 +57,7 @@ public class GameController {
             player[i] = new Player(userInput); // INITIALISE EACH PLAYER WITH NAME
             player[i].depositMoney(balance); // DEPOSIT INITIAL BALANCE
             //GUI_Player player = new GUI_Player(userInput,balance);
-            guiController.addPlayer(userInput,balance);
+            guiPlayer[i] = guiController.addPlayer(guiPlayer[i], userInput, balance);
         }
 
     }
@@ -78,6 +80,9 @@ public class GameController {
 
                 System.out.println(player[i].getPlayerName() + ", you have rolled a " + diceArr[0] + " and a " + diceArr[1] + ". You move " + sum + " squares.");
                 newPosition = player[i].updatePosition(sum);
+
+                //guiController.getPlayerName();
+                //guiController.move(pla);
 
                 System.out.println(player[i].getPlayerName() + " you are on square " + square[newPosition].toString());
 

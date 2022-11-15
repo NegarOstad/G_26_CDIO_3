@@ -166,14 +166,14 @@ import java.awt.*;
     public String getPlayerName() {
         return playerName;
     }
-     public GUI_Player addPlayer(String userInput, int balance){
+     public GUI_Player addPlayer(GUI_Player gui_player, String userInput, int balance){
 
-         GUI_Player gui_player = new GUI_Player(playerName, balance);
+         gui_player = new GUI_Player(playerName, balance);
          fields[0].setCar(gui_player,true);
          return gui_player;
      }
 
-     public void Move(GUI_Player currentPlayer){
+     public void move(GUI_Player currentPlayer){
 
         //GUI_Field i = getCurrentPosition();
         //fields[i].removeAllCars();
