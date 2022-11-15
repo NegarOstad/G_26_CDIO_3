@@ -173,12 +173,12 @@ import java.awt.*;
          return gui_player;
      }
 
-     public void move(GUI_Player currentPlayer){
+     public void move(GUI_Player currentPlayer, int currentPosition){
 
         //GUI_Field i = getCurrentPosition();
         //fields[i].removeAllCars();
-        fields[getCurrentPosition()].removeAllCars();
-        fields[diceSum].setCar(currentPlayer,true);
+        //fields[currentPlayer.getCurrentPosition()].removeAllCars();
+        fields[currentPosition].setCar(currentPlayer,true);
 
 
 

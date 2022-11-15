@@ -54,8 +54,10 @@ public class GameController {
             String guiMessage = "Player " + playerNumber + " enter your name:";
             guiController.showMessage(guiMessage);
             userInput = guiController.getUserString();
+
             player[i] = new Player(userInput); // INITIALISE EACH PLAYER WITH NAME
             player[i].depositMoney(balance); // DEPOSIT INITIAL BALANCE
+
             //GUI_Player player = new GUI_Player(userInput,balance);
             guiPlayer[i] = guiController.addPlayer(guiPlayer[i], userInput, balance);
         }
@@ -82,7 +84,7 @@ public class GameController {
                 newPosition = player[i].updatePosition(sum);
 
                 //guiController.getPlayerName();
-                //guiController.move(pla);
+                guiController.move(guiPlayer[i], newPosition);
 
                 System.out.println(player[i].getPlayerName() + " you are on square " + square[newPosition].toString());
 
