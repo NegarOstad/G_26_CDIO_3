@@ -176,7 +176,7 @@ import java.awt.*;
      public void move(GUI_Player currentPlayer, int currentPosition){
 
         //GUI_Field i = getCurrentPosition();
-        //fields[i].removeAllCars();
+        fields[currentPosition].removeAllCars();
         //fields[currentPlayer.getCurrentPosition()].removeAllCars();
         fields[currentPosition].setCar(currentPlayer,true);
 
