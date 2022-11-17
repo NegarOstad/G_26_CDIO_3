@@ -42,7 +42,8 @@ public class GameController {
 
         players = new Player[playerCount];
         guiPlayers = new GUI_Player[playerCount];
-
+        //guiPlayers[i].setBalance(balance);
+        guiController.setBalanceToPlayers(guiPlayers,balance);
 
         for (int i = 0 ; i < playerCount ; i++) {
             //System.out.println("There are " + playerCount + "players.");
@@ -53,15 +54,11 @@ public class GameController {
             userInput = guiController.getUserString();
             players[i] = new Player(userInput); // INITIALISE EACH PLAYER WITH NAME
             players[i].depositMoney(balance); // DEPOSIT INITIAL BALANCE
-            //guiController.setBalance(balance);
-            guiController.setBalanceToPlayers(guiPlayers[i],balance);
-            //guiPlayers[i].
-
-            //guiPlayers[i] = guiController.addPlayer(guiPlayers[i], userInput, balance);
 
         }
 
       guiPlayers = guiController.addPlayerOnBoard(players);
+
 
     }
 

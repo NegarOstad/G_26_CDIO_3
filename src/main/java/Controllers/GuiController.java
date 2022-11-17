@@ -283,11 +283,11 @@ import java.awt.*;
          }
          return gui_players;
      }
-     public void setBalanceToPlayers(GUI_Player currentPlayer , int balance){
+     public void setBalanceToPlayers(GUI_Player[] currentPlayer , int balance){
          //currentPlayer.setBalance(balance);
         //gui_players.setBalance(balance);
          account.deposit(balance);
-         currentPlayer.getBalance();
+         //urrentPlayer.getBalance();
         //currentPlayer.setBalance(balance);
      }
 
