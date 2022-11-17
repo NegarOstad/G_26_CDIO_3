@@ -47,6 +47,7 @@ public class LandOnSquare {
                     System.out.println(deedOwner.toString() + " owns this place. " + player[i].getPlayerName() + ", you gotta pay " + ((DeedSquare) square[newPosition]).getDeedPrice() + " in rent.");
                     player[i].withdrawMoney(deedPrice);
                     deedOwner.depositMoney(deedPrice);
+                    guiController.payToOwner(deedOwner,player[i],deedPrice);
                     int currentBalance = player[i].getCurrentBalance();
                     System.out.println(player[i].getPlayerName() + ", you now have " + currentBalance + " in your bank account.");
                     guiMessage = player[i].getPlayerName() + ", you now have " + currentBalance + " in your bank account.";

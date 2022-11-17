@@ -1,5 +1,7 @@
 package Controllers;
 import GameComponents.Account;
+import GameComponents.Board.DeedSquare;
+import GameComponents.Board.Square;
 import GameComponents.Die;
 import GameComponents.Player;
 import gui_fields.*;
@@ -26,6 +28,9 @@ import java.awt.*;
     GUI_Ownable ownable ;
 
     Account account = new Account();
+    //DeedSquare deedSquare = new DeedSquare(, checkSquarePris(getCurrentPosition()));
+     DeedSquare deedSquare;
+     Square square;
 
 
 
@@ -243,14 +248,29 @@ import java.awt.*;
 
         return pris;
     }
-    public int payToBank(GUI_Player currentPlayer , int point){
+    public void payToBank(GUI_Player currentPlayer , int point){
         account.withDraw(point);
         balance = account.getBalance();
-         currentPlayer.setBalance(balance);
-         return balance;
+        currentPlayer.setBalance(balance);
+        // return balance;
+    }
+    //Check account of the current balance, if there is enough balance
+    public boolean hasAmount(GUI_Player currentlayer , int currentPositionIndex){
+        if(account.getBalance() >= square.checkSquarePris(currentPositionIndex) )
+            return true;
+        return false;
     }
 
-
+    public boolean hasDeed(GUI_Field[] currentField){
+        return deedSquare.hasDeed();
+    }
+    public void payToOwner(Player currentPlayer , Player owner , int point ){
+        balance =currentPlayer.getCurrentBalance();
+        account.withDraw(point);
+        currentPlayer.getCurrentBalance();
+        owner.getCurrentBalance();
+        account.deposit(point);
+    }
      public GuiController(Die die1 , Die die2) {
         die1 = new Die();
         die2 = new Die();
@@ -285,11 +305,7 @@ import java.awt.*;
          return gui_players;
      }
      public void setBalanceToPlayers(GUI_Player[] currentPlayer , int balance){
-         //currentPlayer.setBalance(balance);
-        //gui_players.setBalance(balance);
          account.deposit(balance);
-         //urrentPlayer.getBalance();
-        //currentPlayer.setBalance(balance);
      }
 
     /* public GUI_Player addPlayer(GUI_Player gui_player, String userInput, int balance){
