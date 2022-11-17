@@ -15,19 +15,17 @@ public class LandOnSquare {
     }
     public void landOnDeedSquare(int newPosition, int currentPlayer) {
         int i = currentPlayer;
-        //guiController.getCurrentPlayer(currentPlayer);
         int deedPrice = ((DeedSquare) square[newPosition]).getDeedPrice();
 
         if(((DeedSquare) square[newPosition]).hasDeed()) {
             System.out.println("This property is available for purchase.");
             guiMessage = "This property is available for purchase.";
-            //guiController.showMessage(guiMessage);
 
             player[i].withdrawMoney(deedPrice); // TO DO: must check if player has enough money to buy
             int currentBalance = player[i].getCurrentBalance();
             System.out.println("You now have " + currentBalance + " in your bank account.");
             guiMessage = "You now have " + currentBalance + " in your bank account.";
-            //guiController.showMessage(guiMessage);
+            //guiController.showMessage(guiMessage); //why gui is null?
 
             System.out.println("owner before " + ((DeedSquare) square[newPosition]).getDeedOwner());
             guiMessage ="owner before " + ((DeedSquare) square[newPosition]).getDeedOwner();

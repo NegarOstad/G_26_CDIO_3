@@ -243,10 +243,11 @@ import java.awt.*;
 
         return pris;
     }
-    public void payToBank(GUI_Player currentPlayer , int point){
+    public int payToBank(GUI_Player currentPlayer , int point){
         account.withDraw(point);
         balance = account.getBalance();
-        currentPlayer.setBalance(balance-point);
+         currentPlayer.setBalance(balance);
+         return balance;
     }
 
 

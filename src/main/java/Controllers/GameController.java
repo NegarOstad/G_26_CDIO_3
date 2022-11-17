@@ -4,10 +4,12 @@ import GameComponents.Board.Square;
 import GameComponents.Cup;
 import GameComponents.Player;
 import gui_fields.GUI_Player;
+import gui_main.GUI;
 
 public class GameController {
     GuiController guiController = new GuiController();
     //Text gameInstruction = new Text("src/DanskTekst.csv");
+    GUI gui;
     public int playerCount = 0;
     String userInput;
     int balance = 0;
@@ -35,6 +37,7 @@ public class GameController {
 
             } else {
                 System.out.println("Invalid player number, please enter an integer between 2 and 4 inclusively.");
+                guiController.showMessage("Invalid player number, please enter an integer between 2 and 4 inclusively.");
             }
         }
         balance = 20-(playerCount-2)*2; //SETS START BALANCE ACCORDING TO AMOUNT OF PLAYERS INPUT
@@ -55,16 +58,11 @@ public class GameController {
             players[i] = new Player(userInput); // INITIALISE EACH PLAYER WITH NAME
             players[i].depositMoney(balance); // DEPOSIT INITIAL BALANCE
 
-            //guiController.setBalanceToPlayers(guiPlayers[i],balance);
-            //guiController.setBalance(balance);
-
-            //guiPlayers[i].
-
-            //guiPlayers[i] = guiController.addPlayer(guiPlayers[i], userInput, balance);
-
         }
 
       guiPlayers = guiController.addPlayerOnBoard(players);
+        guiController.showMessage("Press OK to start the game!");
+
 
 
     }
@@ -87,9 +85,9 @@ public class GameController {
                 int oldPosition = players[i].getPosition();
 
                 System.out.println(players[i].getPlayerName() + ", you have rolled a " + diceArr[0] + " and a " + diceArr[1] + ". You move " + sum + " squares.");
+                guiController.showMessage(players[i].getPlayerName() + ", you have rolled a " + diceArr[0] + " and a " + diceArr[1] + ". You move " + sum + " squares.");
                 newPosition = players[i].updatePosition(sum);
                 guiController.move(guiPlayers[i], oldPosition, newPosition);
-                //guiController.checkSquarePris(newPosition);
                 guiController.payToBank(guiPlayers[i],guiController.checkSquarePris(newPosition));
 
 
@@ -97,13 +95,14 @@ public class GameController {
                 if (newPosition<oldPosition && oldPosition != 18) {
                     players[i].depositMoney(2);
                     System.out.println(players[i].getPlayerName()+ " passed the start square, and will now recieve M2. New balance: " + players[i].getCurrentBalance());
-
+                    guiController.showMessage(players[i].getPlayerName()+ " passed the start square, and will now recieve M2. New balance: " + players[i].getCurrentBalance());
                 //guiController.move(guiPlayers[i], )
 
                 System.out.println(players[i].getPlayerName() + " you are on square " + square[newPosition].toString());
+                guiController.showMessage(players[i].getPlayerName() + " you are on square " + square[newPosition].toString());
                 }
                 System.out.println(players[i].getPlayerName() + " you are on square " + square[newPosition].getSquareName() + "(square #" + players[i].getPosition() + ")");
-
+                guiController.showMessage(players[i].getPlayerName() + " you are on square " + square[newPosition].getSquareName() + "(square #" + players[i].getPosition() + ")");
 
                 //HANDLES THE PROCESS OF LANDING ON A SQUARE AND CALLS METHOD FOR SUBSEQUENT ACTIONS
                 LandOnSquare playerTurn = new LandOnSquare(square, players);
