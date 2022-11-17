@@ -183,6 +183,63 @@ import java.awt.*;
 
 
     }
+    public int checkSquarePris(int currentPositionIndex ){
+        int pris = 0;
+        switch (currentPositionIndex){
+            case 1:
+                pris = 1;
+                break;
+            case 2:
+                pris = 1;
+                break;
+            case 4:
+                pris = 1;
+                break;
+            case 5:
+                pris = 1;
+                break;
+            case 7:
+                pris = 2;
+                break;
+            case 8:
+                pris = 2;
+                break;
+            case 10:
+                pris = 2;
+                break;
+            case 11:
+                pris = 2;
+                break;
+            case 13:
+                pris = 3;
+                break;
+            case 14:
+                pris = 3;
+                break;
+            case 16:
+                pris = 4;
+                break;
+            case 17:
+                pris = 4;
+                break;
+            case 19:
+                pris = 4;
+                break;
+            case 20:
+                pris = 4;
+                break;
+            case 22:
+                pris = 5;
+                break;
+            case 23:
+                pris = 5;
+                break;
+            default:
+                pris = 0;
+        }
+
+        return pris;
+    }
 
      public GuiController(Die die1 , Die die2) {
         die1 = new Die();
