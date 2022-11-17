@@ -43,6 +43,7 @@ public class GameController {
         players = new Player[playerCount];
         guiPlayers = new GUI_Player[playerCount];
 
+
         for (int i = 0 ; i < playerCount ; i++) {
             //System.out.println("There are " + playerCount + "players.");
             int playerNumber = i + 1;
@@ -52,6 +53,9 @@ public class GameController {
             userInput = guiController.getUserString();
             players[i] = new Player(userInput); // INITIALISE EACH PLAYER WITH NAME
             players[i].depositMoney(balance); // DEPOSIT INITIAL BALANCE
+            //guiController.setBalance(balance);
+            guiController.setBalanceToPlayers(guiPlayers[i],balance);
+            //guiPlayers[i].
 
             //guiPlayers[i] = guiController.addPlayer(guiPlayers[i], userInput, balance);
 
@@ -81,6 +85,8 @@ public class GameController {
                 System.out.println(players[i].getPlayerName() + ", you have rolled a " + diceArr[0] + " and a " + diceArr[1] + ". You move " + sum + " squares.");
                 newPosition = players[i].updatePosition(sum);
                 guiController.move(guiPlayers[i], oldPosition, newPosition);
+                //guiController.checkSquarePris(newPosition);
+                guiController.payToBank(guiPlayers[i],guiController.checkSquarePris(newPosition));
 
 
                 // hvis newPosition er mindre end oldPosition, betyder det at man har passeret start

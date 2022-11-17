@@ -1,4 +1,5 @@
 package Controllers;
+import GameComponents.Account;
 import GameComponents.Die;
 import GameComponents.Player;
 import gui_fields.*;
@@ -23,6 +24,8 @@ import java.awt.*;
     private String playerName;
     private int balance;
     GUI_Ownable ownable ;
+
+    Account account = new Account();
 
 
 
@@ -240,6 +243,12 @@ import java.awt.*;
 
         return pris;
     }
+    public void payToBank(GUI_Player currentPlayer , int point){
+        account.withDraw(point);
+        balance = account.getBalance();
+        currentPlayer.setBalance(balance-point);
+    }
+
 
      public GuiController(Die die1 , Die die2) {
         die1 = new Die();
@@ -274,6 +283,11 @@ import java.awt.*;
          }
          return gui_players;
      }
+     public void setBalanceToPlayers(GUI_Player currentPlayer , int balance){
+         //currentPlayer.setBalance(balance);
+        //gui_players.setBalance(balance);
+        currentPlayer.setBalance(balance);
+     }
 
     /* public GUI_Player addPlayer(GUI_Player gui_player, String userInput, int balance){
 
@@ -285,14 +299,8 @@ import java.awt.*;
 
      public void move(GUI_Player currentPlayer, int currentPositionIndex, int diceSum){
 
-        //GUI_Field i = getCurrentPosition();
-        //fields[i].removeAllCars();
-
         fields[currentPositionIndex].setCar(currentPlayer,false);
         fields[diceSum].setCar(currentPlayer,true);
-
-
-
      }
      public int getCurrentPosition(){
         return getCurrentPosition();
