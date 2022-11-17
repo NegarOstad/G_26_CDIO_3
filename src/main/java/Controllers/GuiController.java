@@ -286,7 +286,9 @@ import java.awt.*;
      public void setBalanceToPlayers(GUI_Player currentPlayer , int balance){
          //currentPlayer.setBalance(balance);
         //gui_players.setBalance(balance);
-        currentPlayer.setBalance(balance);
+         account.deposit(balance);
+         currentPlayer.getBalance();
+        //currentPlayer.setBalance(balance);
      }
 
     /* public GUI_Player addPlayer(GUI_Player gui_player, String userInput, int balance){
