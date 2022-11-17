@@ -55,6 +55,13 @@ public class GameController {
             players[i] = new Player(userInput); // INITIALISE EACH PLAYER WITH NAME
             players[i].depositMoney(balance); // DEPOSIT INITIAL BALANCE
 
+            //guiController.setBalanceToPlayers(guiPlayers[i],balance);
+            //guiController.setBalance(balance);
+
+            //guiPlayers[i].
+
+            //guiPlayers[i] = guiController.addPlayer(guiPlayers[i], userInput, balance);
+
         }
 
       guiPlayers = guiController.addPlayerOnBoard(players);
