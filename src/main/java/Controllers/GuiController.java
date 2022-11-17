@@ -260,6 +260,17 @@ import java.awt.*;
             return true;
         return false;
     }
+    // Find the winner
+    public String winner(GUI_Player[] guiPlayer ){
+        int winner = guiPlayer[0].getBalance();
+        for (int i = 0; i < guiPlayer.length; i++) {
+           if(guiPlayer[i].getBalance() > winner )
+               winner = guiPlayer[i].getBalance();
+           playerName = guiPlayer[i].getName();
+
+        }
+     return playerName;
+    }
 
     public boolean hasDeed(GUI_Field[] currentField){
         return deedSquare.hasDeed();
