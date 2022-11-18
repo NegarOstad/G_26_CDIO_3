@@ -263,12 +263,17 @@ import java.awt.*;
     // Find the winner
     public String winner(GUI_Player[] guiPlayer ){
         int winner = guiPlayer[0].getBalance();
-        for (int i = 0; i < guiPlayer.length; i++) {
+        for (GUI_Player i : guiPlayer){
+            if(i.getBalance() > winner )
+                winner = i.getBalance();
+            playerName = i.getName();
+        }
+        /*for (int i = 0; i < guiPlayer.length; i++) {
            if(guiPlayer[i].getBalance() > winner )
                winner = guiPlayer[i].getBalance();
            playerName = guiPlayer[i].getName();
 
-        }
+        }*/
      return playerName;
     }
 
