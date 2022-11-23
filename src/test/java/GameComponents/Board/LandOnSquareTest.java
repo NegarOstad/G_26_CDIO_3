@@ -100,5 +100,28 @@ public class LandOnSquareTest {
         assertEquals(20,testPlayer[0].getCurrentBalance());
 
     }
+    @Test
+    public void passStartTest(){
+        Player[] testPlayer = new Player[1];
+        testPlayer[0] = new Player("Player 1");
+        testPlayer[0].depositMoney(20);
+        int oldPosition = 23;
+        int newPosition = 3;
+        int prevBalance = testPlayer[0].getCurrentBalance();
 
+        if (newPosition<oldPosition && oldPosition != 18) {
+            testPlayer[0].depositMoney(2);
+        }
+        assertEquals(prevBalance+2,testPlayer[0].getCurrentBalance());
+        oldPosition = 18;
+        newPosition = 6;
+        prevBalance = testPlayer[0].getCurrentBalance();
+
+        if (newPosition<oldPosition && oldPosition != 18) {
+            testPlayer[0].depositMoney(2);
+
+        }
+        assertEquals(prevBalance,testPlayer[0].getCurrentBalance());
+
+    }
 }
