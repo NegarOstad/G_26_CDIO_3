@@ -111,11 +111,11 @@ public class GameController {
                 System.out.println(players[i].getPlayerName() + " rolled a " + diceArr[0] + " and a " + diceArr[1] + ". Got moved " + sum + " squares.");
 
                 //TO TEST LANDING ON SPECIFIC SQUARE, COMMENT OUT WHEN NOT IN USE
-                /*int testDie = 1;
-                newPosition = players[i].updatePosition(testDie);*/
+                int testDie = 3;
+                newPosition = players[i].updatePosition(testDie);
 
                 // UNCOMMENT THE FOLLOWING LINE WHEN NOT USING TEST DIE
-                newPosition = players[i].updatePosition(sum);
+                //newPosition = players[i].updatePosition(sum);
                 //guiController.showMessage(players[i].getPlayerName() + ", you have rolled a " + diceArr[0] + " and a " + diceArr[1] + ". You move " + sum + " squares.");
                 guiController.move(guiPlayers[i], oldPosition, newPosition);
 
@@ -130,8 +130,8 @@ public class GameController {
                     System.out.println(passStart);
                     guiController.showMessage(passStart);
 
-                System.out.println(players[i].getPlayerName() + msg.getText("position") + square[newPosition].toString());
-                }
+                    System.out.println(players[i].getPlayerName() + msg.getText("position") + square[newPosition].toString());
+                    }
                 System.out.println(players[i].getPlayerName() + msg.getText("position") + square[newPosition].getSquareName() +  msg.getText("squareNum") + players[i].getPosition());
 
 //=======
