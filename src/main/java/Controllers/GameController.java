@@ -120,6 +120,7 @@ public class GameController {
                 guiController.move(guiPlayers[i], oldPosition, newPosition);
 
 
+
                 // hvis newPosition er mindre end oldPosition, betyder det at man har passeret start
                 if (newPosition<oldPosition && oldPosition != 18) {
                     players[i].depositMoney(2);
@@ -133,6 +134,12 @@ public class GameController {
                 }
                 System.out.println(players[i].getPlayerName() + msg.getText("position") + square[newPosition].getSquareName() +  msg.getText("squareNum") + players[i].getPosition());
 
+//=======
+                System.out.println(players[i].getPlayerName() + ", you have rolled a " + diceArr[0] + " and a " + diceArr[1] + ". You move " + sum + " squares.");
+                newPosition = players[i].updatePosition(sum);
+
+                System.out.println(players[i].getPlayerName() + " you are on square " + square[newPosition].toString());
+//>>>>>>> parent of cbec199 (Land on start square and get 2M)
 
                 //HANDLES THE PROCESS OF LANDING ON A SQUARE AND CALLS METHOD FOR SUBSEQUENT ACTIONS
                 LandOnSquare playerTurn = new LandOnSquare(square, players, guiController, guiPlayers);
