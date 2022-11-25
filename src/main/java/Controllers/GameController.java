@@ -63,7 +63,7 @@ public class GameController {
         while (playerCountInvalid) {
            // playerCount = userInput.nextInt();
             //System.out.println(playerCount);
-            playerCount = guiController.getUserInteger();
+            playerCount = guiController.getUserIntegerPlayerCount();
             if (playerCount >= 2 && playerCount <= 4) {
                 playerCountInvalid = false;
 
@@ -142,13 +142,13 @@ public class GameController {
 //>>>>>>> parent of cbec199 (Land on start square and get 2M)
 
                 //HANDLES THE PROCESS OF LANDING ON A SQUARE AND CALLS METHOD FOR SUBSEQUENT ACTIONS
-                LandOnSquare playerTurn = new LandOnSquare(square, players, guiController, guiPlayers);
+                LandOnSquare playerTurn = new LandOnSquare(square, players, guiController, guiPlayers, playerCount);
                 playerTurn.setLang(msg);
                 if(square[newPosition] instanceof DeedSquare) {
                     playerTurn.landOnDeedSquare(newPosition,i);
 
                 } else if (square[newPosition] instanceof ChanceSquare) {
-                    playerTurn.landOnChanceSquare(newPosition,i);
+                    playerTurn.landOnChanceSquare(i, newPosition, square, players, guiController, guiPlayers, playerCount);
 
                 } else if (square[newPosition] instanceof JailSquare) {
                     playerTurn.landOnJailSquare(newPosition,i);
