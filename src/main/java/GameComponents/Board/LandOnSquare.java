@@ -63,7 +63,7 @@ public class LandOnSquare {
 
             ((DeedSquare) square[newPosition]).sellDeed(player[i], newPosition); // SETS sellDeed TO FALSE AND UPDATES OWNERSHIP
 
-            } else if (((DeedSquare) square[newPosition]).hasDeed()==false) {
+            } else if (!((DeedSquare) square[newPosition]).hasDeed()) {
                 Player deedOwner = ((DeedSquare) square[newPosition]).getDeedOwner();
 
                 if (player[i]==deedOwner) {
@@ -88,14 +88,12 @@ public class LandOnSquare {
 
                 }
 
-
                  System.out.println("");
 
         }
     }
 
     public void landOnStartSquare (int newPosition, int currentPlayer) {
-
 
     }
 

@@ -29,21 +29,39 @@ public class ChanceSquare extends Square{
 
     }
 
+    public int choicePicker(String prompt) {
+        int choice= 0;
+        boolean choiceCountInvalid = true;
 
-    public void noChargeSquare(int noChargeSquareNumber, int currentPlayer) {
+        while (choiceCountInvalid) {
+
+            choice = guiController.getUserInteger(prompt);
+            if (choice ==1 || choice ==2) {
+                choiceCountInvalid = false;
+
+            } else {
+                System.out.println(msg.getText("invalidCount"));
+                guiController.showMessage(msg.getText("invalidCount"));
+            }
+        }
+        return choice;
+    }
+
+
+    public void noChargeSquare(int noChargeSquareNumber, int currentPlayer, int currentPosition) {
 
         player[currentPlayer].goToSquare(noChargeSquareNumber);
+        guiController.move(guiPlayers[currentPlayer],currentPosition,noChargeSquareNumber);
 
-        if (((DeedSquare) square[noChargeSquareNumber]).hasDeed())
-        {
+        if (((DeedSquare) square[noChargeSquareNumber]).hasDeed()) {
             ((DeedSquare) square[noChargeSquareNumber]).sellDeed(player[currentPlayer], noChargeSquareNumber); // SETS sellDeed TO FALSE AND UPDATES OWNERSHIP
         }
-        else if (((DeedSquare) square[noChargeSquareNumber]).hasDeed()==false)
+        else if (!((DeedSquare) square[noChargeSquareNumber]).hasDeed())
         {
             Player deedOwner = ((DeedSquare) square[noChargeSquareNumber]).getDeedOwner();
             int deedPrice = ((DeedSquare) square[noChargeSquareNumber]).getDeedPrice();
 
-            if (player[currentPlayer]==deedOwner) {
+            if (player[currentPlayer] == deedOwner) {
                 String ownerMessage = msg.getText("ownerOfDeed");
                 System.out.println(ownerMessage);
                 guiController.showMessage(ownerMessage);
@@ -67,59 +85,59 @@ public class ChanceSquare extends Square{
 
     }
 
-    public void noChargeOneCategory(String chanceText, int currentPlayer, int squareOne,int squareTwo) {
+    public void noChargeOneCategory(String chanceText, int currentPlayer, int squareOne,int squareTwo, int currentPosition) {
 
         //NO CHARGE SQUARE! Move forward to cyan square. If no one owns it,then you get it for free. Or you have to pay the owner
         String prompt;
-        int choice = 0;
+        int choice;
         System.out.println(msg.getText(chanceText));
         guiController.showMessage(msg.getText(chanceText));
 
         prompt = msg.getText("prompt") + square[squareOne].getSquareName() + msg.getText("or") + square[squareTwo].getSquareName();
-
         System.out.println(prompt);
-        choice = guiController.getUserInteger(prompt);
+
+
+        choice = choicePicker(prompt);
 
         if (choice == 1) {
-            noChargeSquare(squareOne,currentPlayer);
-        } else if (choice == 2) {
-            noChargeSquare(squareTwo, currentPlayer);
+            noChargeSquare(squareOne,currentPlayer,currentPosition);
+        } else {
+            noChargeSquare(squareTwo, currentPlayer,currentPosition);
         }
     }
 
-    public void noChargeTwoCategories(String chanceText, int currentPlayer, String colorOne, String colorTwo, int squareOne,int squareTwo, int squareThree, int squareFour) {
+    public void noChargeTwoCategories(String chanceText, int currentPlayer, String colorOne, String colorTwo, int squareOne,int squareTwo, int squareThree, int squareFour, int currentPosition) {
         String prompt;
         String pick;
-        int choice1 = 0;
+        int choice;
 
         System.out.println(msg.getText(chanceText));
         guiController.showMessage(msg.getText(chanceText));
 
         prompt = msg.getText("prompt") + msg.getText(colorOne) + msg.getText("or") + msg.getText(colorTwo);
         System.out.println(prompt);
-        choice1 = guiController.getUserInteger(prompt);
 
-        switch (choice1) {
-            case 1 -> {
-                pick = msg.getText("pick") + msg.getText(colorOne);
-                noChargeOneCategory(pick, currentPlayer, squareOne, squareTwo);
-            }
-            case 2 -> {
-                pick = msg.getText("pick") + msg.getText(colorTwo);
-                noChargeOneCategory(pick, currentPlayer, squareThree, squareFour);
-            }
+
+        choice = choicePicker(prompt);
+
+        if (choice == 1 ){
+            pick = msg.getText("pick") + msg.getText(colorOne);
+            noChargeOneCategory(pick, currentPlayer, squareOne, squareTwo, currentPosition);
         }
+        else{
+            pick = msg.getText("pick") + msg.getText(colorTwo);
+            noChargeOneCategory(pick, currentPlayer, squareThree, squareFour, currentPosition);
+        }
+
     }
 
 
-
-    public void Roll(int currentPlayer, int currentPosition /*Square[] square, Player[] player, GuiController guiController, GUI_Player[] guiPlayers, int playerCount,Text msg*/)
+    public void Roll(int currentPlayer, int currentPosition)
     {
         int cardNr = (int) (Math.random()*(15-1)) + 1;
         System.out.println(cardNr);
         boolean running = true;
-        int choice2 = 0;
-        int choice1 = 0;
+        int choice;
         String cardMessage;
         String prompt;
 
@@ -127,7 +145,6 @@ public class ChanceSquare extends Square{
             switch (cardNr)
             {
                 case 1: // Move forward to GO. Collect M2
-                    //guiMessage = player[i].getPlayerName() + msg.getText("haveBought") + square[newPosition].getSquareName();
                     cardMessage = msg.getText("chance1");
                     System.out.println(cardMessage);
                     guiController.showMessage(cardMessage);
@@ -159,17 +176,17 @@ public class ChanceSquare extends Square{
                     prompt = msg.getText("prompt") + msg.getText("chance3");
                     System.out.println(prompt);
 
-                    choice1 = guiController.getUserInteger(prompt);
+                    choice = choicePicker(prompt);
 
-                    switch (choice1) {
-                        case 1:
-                            player[currentPlayer].updatePosition(1);
-                            guiController.move(guiPlayers[currentPlayer],currentPosition,currentPosition+1);
-                            running = false;
-                            break;
-                        case 2:
-                            cardNr = (int)(Math.random()*(19-1)) + 1;
+                    if (choice == 1){
+                        player[currentPlayer].updatePosition(1);
+                        guiController.move(guiPlayers[currentPlayer],currentPosition,currentPosition+1);
+                        running = false;
                     }
+                    else{
+                        cardNr = (int)(Math.random()*(19-1)) + 1;
+                    }
+
                     break;
 
                 case 4: //Move forward to the Promenade
@@ -199,8 +216,7 @@ public class ChanceSquare extends Square{
                     guiController.showMessage(cardMessage);
 
                     for (int i = 0; i < playerCount; i++) {
-                        if (i == currentPlayer)
-                        {
+                        if (i == currentPlayer) {
                             continue;
                         }
                         else
@@ -230,42 +246,42 @@ public class ChanceSquare extends Square{
                     System.out.println(cardMessage);
                     guiController.showMessage(cardMessage);
 
-                    noChargeSquare(10,currentPlayer);
+                    noChargeSquare(10,currentPlayer,currentPosition);
                     running = false;
                     break;
 
                 case 9: //NO CHARGE SQUARE! Move forward to cyan or red square. If no one owns it,then you get it for free. Or you have to pay the owner
-                    noChargeTwoCategories("chance9",currentPlayer,"cyan","red",4,5,13,14);
+                    noChargeTwoCategories("chance9",currentPlayer,"cyan","red",4,5,13,14, currentPosition);
                     running = false;
                     break;
 
                 case 10: // NO CHARGE SQUARE! Move forward to lightgrey or yellow square. If no one owns it,then you get it for free. Or you have to pay the owner
-                    noChargeTwoCategories("chance10",currentPlayer,"lightgrey","yellow",1,2,16,17);
+                    noChargeTwoCategories("chance10",currentPlayer,"lightgrey","yellow",1,2,16,17,currentPosition);
                     running = false;
                     break;
 
                 case 11: //NO CHARGE SQUARE! Move forward to orange square. If no one owns it,then you get it for free. Or you have to pay the owner
-                    noChargeOneCategory("chance11",currentPlayer,10,11);
+                    noChargeOneCategory("chance11",currentPlayer,10,11,currentPosition);
                     running=false;
                     break;
 
                 case 12: //NO CHARGE SQUARE! Move forward to cyan square. If no one owns it,then you get it for free. Or you have to pay the owner
-                    noChargeOneCategory("chance12",currentPlayer,4,5);
+                    noChargeOneCategory("chance12",currentPlayer,4,5,currentPosition);
                     running = false;
                     break;
 
                 case 13: //NO CHARGE SQUARE! Move forward to red square. If no one owns it,then you get it for free. Or you have to pay the owner
-                    noChargeOneCategory("chance13",currentPlayer,13,14);
+                    noChargeOneCategory("chance13",currentPlayer,13,14,currentPosition);
                     running = false;
                     break;
 
                 case 14: //NO CHARGE SQUARE! Move forward to orange or green square. If no one owns it,then you get it for free. Or you have to pay the owner
-                    noChargeTwoCategories("chance14",currentPlayer,"orange","green",10,11,19,20);
+                    noChargeTwoCategories("chance14",currentPlayer,"orange","green",10,11,19,20,currentPosition);
                     running = false;
                     break;
 
                 case 15: //NO CHARGE SQUARE! Move forward to pink or dark blue square. If no one owns it,then you get it for free. Or you have to pay the owner
-                    noChargeTwoCategories("chance15",currentPlayer,"pink","darkblue",7,8,22,23);
+                    noChargeTwoCategories("chance15",currentPlayer,"pink","darkblue",7,8,22,23,currentPosition);
 
                     running = false;
                     break;
