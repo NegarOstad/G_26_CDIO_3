@@ -260,7 +260,22 @@ import java.awt.*;
      }
 
      public int getUserLang() {
-        return gui.getUserInteger("You are in English mode. Enter 1 to keep English or enter 2 to switch to Danish.");
+         int choice= 0;
+         boolean choiceCountInvalid = true;
+
+         while (choiceCountInvalid) {
+
+             choice = gui.getUserInteger("You are in English mode. Enter 1 to keep English or enter 2 to switch to Danish.");
+             if (choice ==1 || choice ==2) {
+                 choiceCountInvalid = false;
+
+             } else {
+                 System.out.println(msg.getText("invalidCount"));
+                 gui.showMessage(msg.getText("invalidCount"));
+             }
+         }
+         return choice;
+
      }
      public String getUserString(int currentPlayer){
 

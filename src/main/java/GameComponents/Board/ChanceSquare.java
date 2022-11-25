@@ -101,8 +101,10 @@ public class ChanceSquare extends Square{
 
         if (choice == 1) {
             noChargeSquare(squareOne,currentPlayer,currentPosition);
+            guiController.move(guiPlayers[currentPlayer],currentPosition,squareOne);
         } else {
             noChargeSquare(squareTwo, currentPlayer,currentPosition);
+            guiController.move(guiPlayers[currentPlayer],currentPosition,squareTwo);
         }
     }
 
@@ -141,6 +143,16 @@ public class ChanceSquare extends Square{
         String cardMessage;
         String prompt;
 
+        boolean cardNrInvalid= true;
+        while (cardNrInvalid) {
+            if (cardNr >=1 && cardNr<=15) {
+                cardNrInvalid = false;
+
+            } else {
+                cardNr = (int) (Math.random()*(15-1)) + 1;
+            }
+        }
+
         while(running) {
             switch (cardNr)
             {
@@ -164,7 +176,7 @@ public class ChanceSquare extends Square{
                     guiController.showMessage(cardMessage);
 
                     player[currentPlayer].updatePosition(5);
-                    guiController.move(guiPlayers[currentPlayer],currentPosition,5);
+                    guiController.move(guiPlayers[currentPlayer],currentPosition,currentPosition+5);
                     running = false;
                     break;
 
@@ -216,11 +228,7 @@ public class ChanceSquare extends Square{
                     guiController.showMessage(cardMessage);
 
                     for (int i = 0; i < playerCount; i++) {
-                        if (i == currentPlayer) {
-                            continue;
-                        }
-                        else
-                        {
+                        if (i != currentPlayer) {
                             player[i].withdrawMoney(1);
                             player[currentPlayer].depositMoney(1);
                             guiController.updateBalance(guiPlayers[i],player[i].getCurrentBalance());
@@ -231,10 +239,12 @@ public class ChanceSquare extends Square{
 
                     running = false;
                     break;
+
                 case 7: //You have done your homework! Collect M2 from the bank
                     cardMessage = msg.getText("chance7");
                     System.out.println(cardMessage);
                     guiController.showMessage(cardMessage);
+
                     player[currentPlayer].depositMoney(2);
                     guiController.updateBalance(guiPlayers[currentPlayer],player[currentPlayer].getCurrentBalance());
 
@@ -256,7 +266,7 @@ public class ChanceSquare extends Square{
                     break;
 
                 case 10: // NO CHARGE SQUARE! Move forward to lightgrey or yellow square. If no one owns it,then you get it for free. Or you have to pay the owner
-                    noChargeTwoCategories("chance10",currentPlayer,"lightgrey","yellow",1,2,16,17,currentPosition);
+                    noChargeTwoCategories("chance10",currentPlayer,"lightgray","yellow",1,2,16,17,currentPosition);
                     running = false;
                     break;
 
@@ -287,6 +297,7 @@ public class ChanceSquare extends Square{
                     break;
 
                 default:
+                    running = false;
                     break;
             }
 
