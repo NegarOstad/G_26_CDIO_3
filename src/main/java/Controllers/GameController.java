@@ -145,18 +145,22 @@ public class GameController {
                 LandOnSquare playerTurn = new LandOnSquare(square, players, guiController, guiPlayers, playerCount);
                 playerTurn.setLang(msg);
                 if(square[newPosition] instanceof DeedSquare) {
+
                     playerTurn.landOnDeedSquare(newPosition,i);
 
                 } else if (square[newPosition] instanceof ChanceSquare) {
                     playerTurn.landOnChanceSquare(i, newPosition, square, players, guiController, guiPlayers, playerCount);
 
                 } else if (square[newPosition] instanceof JailSquare) {
+
                     playerTurn.landOnJailSquare(newPosition,i);
 
                 } else if (square[newPosition] instanceof ParkingSquare) {
+
                     playerTurn.landOnParkingSquare(newPosition);
 
                 } else {
+
                     playerTurn.landOnStartSquare(newPosition,i);
                 }
 
@@ -173,7 +177,8 @@ public class GameController {
                 System.out.println("");
                 System.out.println("");
 
-                }
+
+            }
 
             }
 

@@ -225,6 +225,10 @@ import java.awt.*;
 
      }
 
+     public void removeCar(GUI_Player currentPlayer,int currentPositionIndex){
+         fields[currentPositionIndex].setCar(currentPlayer,false);
+     }
+
      /**
       * Sets name of owner of a deed when buying it and displays name in center square when clicking on DeedSquare
       * @param currentPlayer current Player buying the deed
@@ -266,7 +270,7 @@ import java.awt.*;
          while (choiceCountInvalid) {
 
              choice = gui.getUserInteger("You are in English mode. Enter 1 to keep English or enter 2 to switch to Danish.");
-             if (choice ==1 || choice ==2) {
+             if (choice == 1 || choice == 2) {
                  choiceCountInvalid = false;
 
              } else {
